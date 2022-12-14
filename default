@@ -1,0 +1,72 @@
+MENU TITLE PXE Boot Menu
+DEFAULT vesamenu.c32
+TIMEOUT 100
+
+	LABEL LOCAL
+		MENU LABEL Boot from local drive
+		LOCALBOOT 0xffff
+
+	MENU BEGIN amd64
+	MENU TITLE amd64
+
+		MENU BEGIN Ubuntu
+		MENU TITLE Ubuntu
+			LABEL install
+				MENU LABEL Try Ubuntu Desktop
+				KERNEL ::netboot/amd64/ubuntu/desktop/vmlinuz
+				INITRD ::netboot/amd64/ubuntu/desktop/initrd
+				APPEND nfsroot=<NFS server IP>:/nfs/nfsboot/ubuntu/desktop ro netboot=nfs boot=casper ip=dhcp
+			TEXT HELP
+			(ESC to go back)
+			ENDTEXT
+			LABEL install http
+				MENU LABEL Try Ubuntu Desktop (HTTP Download)
+				KERNEL ::netboot/amd64/ubuntu/desktop/vmlinuz
+				INITRD ::netboot/amd64/ubuntu/desktop/initrd
+				APPEND root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://<HTTP server IP>/httpboot/ubuntu/desktop/ubuntu.iso
+			TEXT HELP
+			Recommended 8 GB of RAM for HTTP Download
+			(ESC to go back)
+			ENDTEXT
+		MENU END
+
+		MENU BEGIN Arch Linux
+		MENU TITLE Arch Linux
+			LABEL install
+				MENU LABEL Arch Live Environment
+				LINUX ::netboot/amd64/archlinux/vmlinuz-linux
+				INITRD ::netboot/amd64/archlinux/initramfs-linux.img,::netboot/amd64/archlinux/amd-ucode.img,::netboot/amd64/archlinux/intel-ucode.img
+				APPEND archisobasedir=arch archiso_nfs_srv=<NFS server IP>:/nfs/nfsboot/archlinux ip=dhcp
+				SYSAPPEND 3
+			TEXT HELP
+			For advanced users only
+			(ESC to go back)
+			ENDTEXT
+			LABEL install http
+				MENU LABEL Arch Live Environment (HTTP Download)
+				LINUX ::netboot/amd64/archlinux/vmlinuz-linux
+				INITRD ::netboot/amd64/archlinux/initramfs-linux.img,::netboot/amd64/archlinux/amd-ucode.img,::netboot/amd64/archlinux/intel-ucode.img
+				APPEND archisobasedir=arch archiso_http_srv=http://<HTTP server IP>/httpboot/archlinux/ ip=dhcp
+				SYSAPPEND 3
+			TEXT HELP
+			For advanced users only
+			8 GB of RAM recommended for HTTP Download
+			(ESC to go back)
+			ENDTEXT
+		MENU END
+
+		MENU BEGIN Debian
+		MENU TITLE Debian
+			LABEL install
+				MENU LABEL Install (!!!) Debian
+				KERNEL ::netboot/amd64/debian/linux
+				INITRD ::netboot/amd64/debian/initrd.gz
+			TEXT HELP
+			Please be careful choosing this option!
+			Internet connected required for Debian.
+			(ESC to go back)
+			ENDTEXT
+		MENU END
+	
+	MENU END
+	
