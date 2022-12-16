@@ -23,7 +23,7 @@ TIMEOUT 100
 				MENU LABEL Try Ubuntu Desktop (HTTP Download)
 				KERNEL ::netboot/amd64/ubuntu/desktop/vmlinuz
 				INITRD ::netboot/amd64/ubuntu/desktop/initrd
-				APPEND root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://<HTTP server IP>/httpboot/ubuntu/desktop/ubuntu.iso
+				APPEND root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://<HTTP server IP>/httpboot/ubuntu/desktop/ubuntu-desktop-latest.iso
 			TEXT HELP
 			Recommended 8 GB of RAM for HTTP Download
 			(ESC to go back)
