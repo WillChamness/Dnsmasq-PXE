@@ -29,6 +29,8 @@ Generally useful packages to have:
 - tree
 - ufw (or other firewall)
 <br></br>
+
+# DIRECTORY SETUP
 ## TFTP
 The TFTP root will be located in `/tftpboot/`. Create the following directories:
 ```
