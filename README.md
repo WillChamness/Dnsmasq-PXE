@@ -6,8 +6,8 @@ These are the requirements:
 - The DHCP server can be a dedicated server or integrated into the PXE server 
 - The NFS server can be a dedicated server or integrated into the PXE server
 - The HTTP server can be a dedicated server or integrated into the PXE server (optional)
-- All of the above servers have static IP addresses
-<br></br>
+- All of the above servers have static IP addresses 
+
 This guide focuses on Dnsmasq for DHCP, TFTP, PXE, and DNS. You may choose to use to use another daemon, but you will have to configure DHCP options 1, 3, 6, 60, 66, 67, 93, and possibly more. If you are not able to modify them, then you will likely not be able to set up PXE. Furthermore, you will have to reasearch the syntax for your DHCP server.
 <br></br>
 PXE booting will be enabled for both BIOS and UEFI devices. If you only have BIOS or if you only have UEFI, you can choose to simplify your DHCP, PXE, and TFTP configuration.
@@ -22,7 +22,7 @@ You will need to install these apt packages on their respective server:
 - syslinux-efi (PXE)
 - nfs-kernel-server (NFS)
 - apache2 (HTTP)
-<br></br>
+
 Generally useful packages to have:
 - htop
 - neofetch
@@ -48,7 +48,7 @@ sudo mkdir -p /nfs/nfsboot/{archlinux,ubuntu}
 sudo mkdir -p /nfs/nfsboot/ubuntu/desktop
 ```
 ### add picture here
-Note that there is no directory for Debian. This is intentional: Debian cannot boot via NFS
+Note that there is no directory for Debian. This is intentional: Debian cannot boot via NFS.
 
 ## HTTP
 The HTTP root is located in `/var/www/html/` by default. Create the following directories:
@@ -57,11 +57,11 @@ sudo mkdir -p /var/www/html/httpboot/{archlinux,ubuntu}
 sudo mkdir -p /var/www/html/httpboot/ubuntu/dekstop
 ```
 ### add picture here
-Note that there is no directory for Debian. This is intentional: Debian cannot boot with HTTP
+Note that there is no directory for Debian. This is intentional: Debian cannot boot with HTTP.
 
 # NFS SETUP
 ## Copying Files from the ISOs
-First, download the isos of the distros you want to netboot via wget or transfer them from you PC (Debian is not necessary). Then, do the following (separately):
+First, download the ISOs of the distros you want via wget or transfer them from you PC (Debian is not necessary). Then, do the following (separately):
 ```
 sudo mount archlinux-latest.iso /mnt
 sudo cp -r /mnt/. /nfs/nfsboot/archlinux
@@ -90,7 +90,7 @@ sudo exportfs -av
 For Ubuntu, all you need to do is place the Ubuntu ISO in its respective directory in the web root. For Arch, you must copy the contents of the iso and put it in its respective directory like with NFS.
 <br></br>
 # DNS, DHCP, TFTP CONFIG
-Backup the file `/etc/dnsmasq.conf`. Then modify it. Use the `dnsmasq.conf` file in Github as a template.
+Backup the file `/etc/dnsmasq.conf`. Then modify it, using the `dnsmasq.conf` file in Github as a template.
 <br></br>
 If you already have a DNS or DHCP server, the file provides the syntax to disable DNS and put DHCP into proxy mode.
 <br></br>
@@ -99,8 +99,6 @@ Otherwise, edit `/etc/resolv.conf`. It should look something like this:
 
 # PXE CONFIG
 ## Copying necessary files
-You will need to copy several files.
-<br></br>
 BIOS:
 ```
 sudo cp /usr/lib/syslinux/modules/bios/{ldlinux,vesamenu,libcom32,libutil}.c32 /tftpboot/bios
@@ -132,13 +130,13 @@ sudo cp /nfs/nfsboot/ubuntu/desktop/casper/{vmlinuz,initrd} /tftpboot/netboot/am
 sudo cp /nfs/nfsboot/archlinux/arch/boot/{amd-ucode,intel-ucode}.img /tftpboot/netboot/amd64/archlinux
 sudo cp /nfs/nfsboot/archlinux/arch/boot/x86_64/{vmlinuz-linux,initramfs-linux.img} /tftpboot/netboot/amd64/archlinux
 ```
-Note that Arch has more than one ramdisk file (*.img). This is simply for your convinience when the live environment boots. Technically, you only need the last of the three, but you should include them all anyways.
+Note that Arch has more than one ramdisk file (*.img). This is simply for your convinience when the live environment boots. Technically, you only need the last of the three, but you should include them all anyways. <br></br>
 **Debian:**
-You will need to download the kernel (linux) and initial ramdisk (initrd.gz) from [Debian](https://deb.debian.org/debian/dists/bullseye/main/installer-amd64/current/images/netboot/debian-installer/amd64/)
+You will need to download the kernel (linux) and initial ramdisk (initrd.gz) from [Debian](https://deb.debian.org/debian/dists/bullseye/main/installer-amd64/current/images/netboot/debian-installer/amd64/).
 <br></br>
-The link to the kernel is [here](https://deb.debian.org/debian/dists/bullseye/main/installer-amd64/current/images/netboot/debian-installer/amd64/linux)
+The link to the kernel is [here](https://deb.debian.org/debian/dists/bullseye/main/installer-amd64/current/images/netboot/debian-installer/amd64/linux).
 <br></br>
-THe link to the initial ramdisk is [here](https://deb.debian.org/debian/dists/bullseye/main/installer-amd64/current/images/netboot/debian-installer/amd64/initrd.gz)
+THe link to the initial ramdisk is [here](https://deb.debian.org/debian/dists/bullseye/main/installer-amd64/current/images/netboot/debian-installer/amd64/initrd.gz).
 <br></br>
 Recall that there is no option to boot Debian along with NFS or HTTP. This is because Debian can only boot with TFTP. It will use the internet to download all the necessary packages.
 <br></br>
