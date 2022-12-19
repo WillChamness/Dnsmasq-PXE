@@ -140,7 +140,7 @@ THe link to the initial ramdisk is [here](https://deb.debian.org/debian/dists/bu
 <br></br>
 Recall that there is no option to boot Debian along with NFS or HTTP. This is because Debian can only boot with TFTP. It will use the internet to download all the necessary packages.
 <br></br>
-## PXE OVERVIEW
+## PXE Overview
 In the end, the TFTP root should look like this: <br></br>
 ![pxe overview](./.github/pxe-overview.png?raw=true) <br></br>
 
