@@ -37,7 +37,7 @@ sudo mkdir -p /tftpboot/netboot/amd64/{archlinux,debian,ubuntu}
 sudo mkdir /tftpboot/netboot/amd64/ubuntu/desktop
 sudo mkdir /tftpboot/netboot/arm64
 ```
-### add picture here
+![tftpboot](./.github/tftpboot-directory.png?raw=true)<br></br>
 The structure is almost entirely arbitrary. The only directory that is not is `pxelinux.cfg`. The directory *must* be named this, and it *must* be in the TFTP root.
 <br></br>
 Notice that there is a directory for arm64. PXE booting ARM devices requires an entirely separate configuration, and as such it is outside the score of this document. However, the option is available to do so. Furthermore, you may choose choose to add an option for Ubuntu Server, Kubuntu, Xubuntu, etc. in the Ubuntu directory.
@@ -47,7 +47,7 @@ The required files will be placed in `/nfs/nfsboot/`. Create the following direc
 sudo mkdir -p /nfs/nfsboot/{archlinux,ubuntu}
 sudo mkdir -p /nfs/nfsboot/ubuntu/desktop
 ```
-### add picture here
+![nfs](./.github/nfs-directory.png?raw=true)<br></br>
 Note that there is no directory for Debian. This is intentional: Debian cannot boot via NFS.
 
 ## HTTP
@@ -56,7 +56,7 @@ The HTTP root is located in `/var/www/html/` by default. Create the following di
 sudo mkdir -p /var/www/html/httpboot/{archlinux,ubuntu}
 sudo mkdir -p /var/www/html/httpboot/ubuntu/dekstop
 ```
-### add picture here
+![http](./.github/http-directory.png?raw=true)<br></br>
 Note that there is no directory for Debian. This is intentional: Debian cannot boot with HTTP.
 
 # NFS SETUP
@@ -94,8 +94,8 @@ Backup the file `/etc/dnsmasq.conf`. Then modify it, using the `dnsmasq.conf` fi
 <br></br>
 If you already have a DNS or DHCP server, the file provides the syntax to disable DNS and put DHCP into proxy mode.
 <br></br>
-Otherwise, edit `/etc/resolv.conf`. It should look something like this:
-### add picture
+Otherwise, edit `/etc/resolv.conf`. It should look something like this: <br></br>
+![resolve.conf](./.github/resolv.conf.png?raw=true)<br></br>
 
 # PXE CONFIG
 ## Copying necessary files
@@ -141,9 +141,9 @@ THe link to the initial ramdisk is [here](https://deb.debian.org/debian/dists/bu
 Recall that there is no option to boot Debian along with NFS or HTTP. This is because Debian can only boot with TFTP. It will use the internet to download all the necessary packages.
 <br></br>
 ## PXE OVERVIEW
-In the end, the TFTP root should look like this:
-### add picture here
-<br></br>
+In the end, the TFTP root should look like this: <br></br>
+![pxe overview](./.github/pxe-overview.png?raw=true) <br></br>
+
 # FIREWALL CONFIGURATION
 If you have a firewall enabled, there are several ports you need to enable. These are the ports you need allowed on their respective servers:
 <br></br>
@@ -161,9 +161,9 @@ If you have a firewall enabled, there are several ports you need to enable. Thes
 - 40000 (NFS, replace this if you chose a different port)
 <br></br>
 # CONCLUSION
-At this point, everything should be ready. Restart dnsmasq, nfs-kernel-server, and apache2 daemons. Upon setting the boot priority to IPv4, you should see this screen:
-### add picture
-<br></br>
+At this point, everything should be ready. Restart dnsmasq, nfs-kernel-server, and apache2 daemons. Upon setting the boot priority on a PC to IPv4, you should see this screen:
+![end result](./.github/end-result.png?raw=true) <br></br>
+
 Make sure the distros boot properly. Also feel free to add more distros to your PXE server. One last thing to note, it seems that `archinstall` is extremely unstable when netbooting Arch (at the time of me writing this guide). In testing, it took 3 attempts before it installed successfully.
 <br></br>
 <br></br>
