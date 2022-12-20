@@ -42,7 +42,7 @@ sudo mkdir /tftpboot/netboot/arm64
 ![tftpboot](./.github/tftpboot-directory.png?raw=true)<br></br>
 The structure is almost entirely arbitrary. The only directory that is not is `pxelinux.cfg`. The directory *must* be named this, and it *must* be in the TFTP root.
 <br></br>
-Notice that there is a directory for arm64. PXE booting ARM devices requires an entirely separate configuration, and as such it is outside the score of this document. However, the option is available to do so. Furthermore, you may choose choose to add an option for Ubuntu Server, Kubuntu, Xubuntu, etc. in the Ubuntu directory.
+Notice that there is a directory for arm64. PXE booting ARM devices requires an entirely separate configuration, and as such it is outside the score of this document. However, the option is available to do so. Furthermore, you may choose to add an option for Ubuntu Server, Kubuntu, Xubuntu, etc. in the Ubuntu directory.
 ## NFS
 The required files will be placed in `/nfs/nfsboot/`. Create the following directories:
 ```
@@ -133,12 +133,12 @@ sudo cp /nfs/nfsboot/archlinux/arch/boot/{amd-ucode,intel-ucode}.img /tftpboot/n
 sudo cp /nfs/nfsboot/archlinux/arch/boot/x86_64/{vmlinuz-linux,initramfs-linux.img} /tftpboot/netboot/amd64/archlinux
 ```
 Note that Arch has more than one ramdisk file (*.img). This is simply for your convinience when the live environment boots. Technically, you only need the last of the three, but you should include them all anyways. <br></br>
-**Debian:**
+**Debian:** <br></br>
 You will need to download the kernel (linux) and initial ramdisk (initrd.gz) from [Debian](https://deb.debian.org/debian/dists/bullseye/main/installer-amd64/current/images/netboot/debian-installer/amd64/).
 <br></br>
 The link to the kernel is [here](https://deb.debian.org/debian/dists/bullseye/main/installer-amd64/current/images/netboot/debian-installer/amd64/linux).
 <br></br>
-THe link to the initial ramdisk is [here](https://deb.debian.org/debian/dists/bullseye/main/installer-amd64/current/images/netboot/debian-installer/amd64/initrd.gz).
+The link to the initial ramdisk is [here](https://deb.debian.org/debian/dists/bullseye/main/installer-amd64/current/images/netboot/debian-installer/amd64/initrd.gz).
 <br></br>
 Recall that there is no option to boot Debian along with NFS or HTTP. This is because Debian can only boot with TFTP. It will use the internet to download all the necessary packages.
 <br></br>
@@ -163,10 +163,10 @@ If you have a firewall enabled, there are several ports you need to enable. Thes
 - 40000 (NFS, replace this if you chose a different port)
 <br></br>
 # CONCLUSION
-At this point, everything should be ready. Restart dnsmasq, nfs-kernel-server, and apache2 daemons. Upon setting the boot priority on a PC to IPv4, you should see this screen:
+At this point, everything should be ready. Reboot the server or restart dnsmasq, nfs-kernel-server, and apache2. Upon setting the boot priority on a PC to IPv4, you should see this screen:
 ![end result](./.github/end-result.png?raw=true) <br></br>
 
-Make sure the distros boot properly. Also feel free to add more distros to your PXE server. One last thing to note, it seems that `archinstall` is extremely unstable when netbooting Arch (at the time of me writing this guide). In testing, it took 3 attempts before it installed successfully.
+Make sure the distros boot properly. Also feel free to add more distros to your PXE server. One last thing to note, `archinstall` is extremely unstable when netbooting Arch (at the time of me writing this guide). In testing, it took 3 attempts before it installed successfully.
 <br></br>
 <br></br>
 This guide is a combination of these:
