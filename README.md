@@ -165,6 +165,8 @@ If you have a firewall enabled, there are several ports you need to enable. Thes
 # CONCLUSION
 At this point, everything should be ready. Reboot the server or restart dnsmasq, nfs-kernel-server, and apache2. Upon setting the boot priority on a PC to IPv4, you should see this screen:
 ![end result](./.github/end-result.png?raw=true) <br></br>
+![end result 2](./.github/end-result-2.png?raw=true) <br></br>
+![end result 3](./.github/end-result-3.png?raw=true) <br></br>
 
 Make sure the distros boot properly. Also feel free to add more distros to your PXE server. One last thing to note, `archinstall` is extremely unstable when netbooting Arch (at the time of me writing this guide). In testing, it took 3 attempts before it installed successfully.
 <br></br>
