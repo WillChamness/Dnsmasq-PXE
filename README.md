@@ -8,7 +8,7 @@ These are the requirements:
 - The HTTP server can be a dedicated server or integrated into the PXE server (optional)
 - All of the above servers have static IP addresses 
 
-This guide focuses on Dnsmasq for DHCP, TFTP, PXE, and DNS. You may choose to use to use another daemon, but you will have to configure DHCP options 1, 3, 6, 60, 66, 67, 93, and possibly more. If you are not able to modify them, then you will likely not be able to set up PXE. Furthermore, you will have to reasearch the syntax for your DHCP server.
+This guide focuses on Dnsmasq for DHCP, TFTP, PXE, and DNS. You may choose to use to use another daemon, but you will have to configure DHCP options 1, 3, 6, 60, 66, 67, 93, and possibly more. If you are not able to modify them, then you will likely not be able to set up PXE. Furthermore, you will have to reasearch the syntax for your DHCP server. Alternatively, you can simply use Dnsmasq as a DHCP proxy.
 <br></br>
 PXE booting will be enabled for both BIOS and UEFI devices. If you only have BIOS or if you only have UEFI, you can choose to simplify your DHCP, PXE, and TFTP configuration.
 <br></br>
@@ -63,7 +63,7 @@ Note that there is no directory for Debian. This is intentional: Debian cannot b
 
 # NFS SETUP
 ## Copying Files from the ISOs
-First, download the ISOs of the distros you want via wget or transfer them from you PC (Debian is not necessary). Then, do the following (separately):
+First, download the ISOs of the distros you want via wget or transfer them from your PC (Debian is not necessary). Then, do the following (separately):
 ```
 sudo mount archlinux-latest.iso /mnt
 sudo cp -r /mnt/. /nfs/nfsboot/archlinux
@@ -113,7 +113,7 @@ sudo cp /usr/lib/syslinux/modules/efi64/{vesamenu,libcom32,libutil}.c32 /tftpboo
 sudo cp /usr/lib/SYSLINUX.EFI/efi64/syslinux.efi /tftpboot/efi64
 ```
 ## Creating the default file
-Create `/tftpboot/pxelinux.cfg/default`. Use the `default` file in Github as a template. Please take special care to follow to the smallest detail. Arch is especially picky about its parameters (notice the HTTP download link ends with an extra "/")
+Create `/tftpboot/pxelinux.cfg/default`. Use the `default` file in Github as a template. Please take special care to follow to the smallest detail. Arch is especially picky about its parameters (notice the HTTP download link ends with an extra "/").
 <br></br>
 You will also have to link the `/tftpboot/pxelinux.cfg` directory:
 ```
