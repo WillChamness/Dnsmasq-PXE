@@ -7,6 +7,7 @@ These are the requirements:
 - The NFS server can be a dedicated server or integrated into the PXE server
 - The HTTP server can be a dedicated server or integrated into the PXE server (optional)
 - All of the above servers have static IP addresses 
+- An internet connection
 
 This guide focuses on Dnsmasq for DHCP, TFTP, PXE, and DNS. You may choose to use to use another daemon, but you will have to configure DHCP options 1, 3, 6, 60, 66, 67, 93, and possibly more. If you are not able to modify them, then you will likely not be able to set up PXE. Furthermore, you will have to reasearch the syntax for your DHCP server. Alternatively, you can simply use Dnsmasq as a DHCP proxy.
 <br></br>
