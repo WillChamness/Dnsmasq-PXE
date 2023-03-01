@@ -11,7 +11,7 @@ These are the requirements:
 
 This guide focuses on Dnsmasq for DHCP, TFTP, PXE, and DNS. You may choose to use to use another daemon, but you will have to configure DHCP options 1, 3, 6, 60, 66, 67, 93, and possibly more. If you are not able to modify them, then you will likely not be able to set up PXE. Furthermore, you will have to research the syntax for your DHCP server. Alternatively, you can simply use Dnsmasq as a DHCP proxy.
 <br></br>
-PXE booting will be enabled for both BIOS and UEFI devices. If you only have BIOS or if you only have UEFI, you can choose to simplify your DHCP, PXE, and TFTP configuration.
+PXE booting will be enabled for both BIOS and UEFI devices. If you only have BIOS or if you only have UEFI, you can simplify your DHCP, PXE, and TFTP configuration.
 <br></br>
 Lastly, HTTP is entirely optional. **Some** Ubuntu-based distros will allow you to boot with TFTP and HTTP instead of TFTP and NFS. This is likely the case with Arch Linux as well. You may choose whichever configuration you want, but as far as I am aware, NFS works with all Ubuntu-based distros.
 <br></br>
@@ -83,7 +83,7 @@ Edit line 12 of `/etc/default/nfs-kernel-server/` so that it looks like this:
 ```
 RPCMOUNTDOPTS="--port 40000"
 ```
-The port is arbitrary, but you should use a port that is unused.
+The port is arbitrary, but you should use one that is unused.
 <br></br>
 Edit `/etc/exports`. Use the `exports` file in Github as a template. Export the shares with this command:
 ```
@@ -169,7 +169,12 @@ At this point, everything should be ready. Reboot the server or restart dnsmasq,
 ![end result 2](./.github/end-result-2.png?raw=true) <br></br>
 ![end result 3](./.github/end-result-3.png?raw=true) <br></br>
 
-Make sure the distros boot properly. Also feel free to add more distros to your PXE server. One last thing to note, `archinstall` is extremely unstable when netbooting Arch (at the time of me writing this guide). In testing, it took 3 attempts before it installed successfully.
+Make sure the distros boot properly. Also feel free to add more distros to your PXE server. Furthermore, `archinstall` is extremely unstable when netbooting Arch (at the time of me writing this guide). In testing, it took 3 attempts before it installed successfully.
+<br></br>
+Lastly, if you are booting a virtual machine, there is one last step. When testing a UEFI VM in Proxmox, I received an access denied error:
+![vm error](./.github/vm-error.png?raw=true) <br></br>
+If this is also the case for you, secure boot may be preventing the VM from booting. Disable the pre-enroll keys before VM creation:
+![proxmox pre-enroll keys](./.github/proxmox-pre-enroll-keys.png?raw=true) <br></br>
 <br></br>
 <br></br>
 This guide is a combination of these:
