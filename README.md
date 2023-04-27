@@ -173,7 +173,7 @@ Make sure the distros boot properly. Also feel free to add more distros to your 
 <br></br>
 Lastly, if you are booting a virtual machine, there is one last step. When testing a UEFI VM in Proxmox, I received an access denied error:
 ![vm error](./.github/vm-error.png?raw=true) <br></br>
-If this is also the case for you, secure boot may be preventing the VM from booting. Disable the pre-enroll keys before VM creation:
+If this is also the case for you, secure boot may be preventing the VM from booting. In my setup, this was solved by disabling the pre-enroll keys before VM creation:
 ![proxmox pre-enroll keys](./.github/proxmox-pre-enroll-keys.png?raw=true) <br></br>
 <br></br>
 <br></br>
