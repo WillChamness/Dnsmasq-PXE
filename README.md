@@ -163,6 +163,13 @@ If you have a firewall enabled, there are several ports you need to enable. Thes
 - 2049 (NFS)
 - 40000 (NFS, replace this if you chose a different port)
 <br></br>
+
+# SECURE BOOT
+Lastly, there is one last step. When testing a UEFI VM in Proxmox, I received an access denied error:
+![vm error](./.github/vm-error.png?raw=true) <br></br>
+If this is also the case for you, secure boot may be preventing the computer from booting. In my setup, this was solved by disabling the pre-enroll keys before VM creation:
+![proxmox pre-enroll keys](./.github/proxmox-pre-enroll-keys.png?raw=true) <br></br>
+
 # CONCLUSION
 At this point, everything should be ready. Reboot the server or restart dnsmasq, nfs-kernel-server, and apache2. Upon setting the boot priority on a PC to IPv4, you should see this screen:
 ![end result](./.github/end-result.png?raw=true) <br></br>
@@ -170,11 +177,6 @@ At this point, everything should be ready. Reboot the server or restart dnsmasq,
 ![end result 3](./.github/end-result-3.png?raw=true) <br></br>
 
 Make sure the distros boot properly. Also feel free to add more distros to your PXE server. Furthermore, `archinstall` is extremely unstable when netbooting Arch (at the time of me writing this guide). In testing, it took 3 attempts before it installed successfully.
-<br></br>
-Lastly, if you are booting a virtual machine, there is one last step. When testing a UEFI VM in Proxmox, I received an access denied error:
-![vm error](./.github/vm-error.png?raw=true) <br></br>
-If this is also the case for you, secure boot may be preventing the VM from booting. In my setup, this was solved by disabling the pre-enroll keys before VM creation:
-![proxmox pre-enroll keys](./.github/proxmox-pre-enroll-keys.png?raw=true) <br></br>
 <br></br>
 <br></br>
 This guide is a combination of these:
