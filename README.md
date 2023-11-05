@@ -43,7 +43,7 @@ sudo mkdir /tftpboot/netboot/arm64
 ![tftpboot](./.github/tftpboot-directory.png?raw=true)<br></br>
 The structure is almost entirely arbitrary. The only directory that is not is `pxelinux.cfg`. The directory *must* be named this, and it *must* be in the TFTP root.
 <br></br>
-Notice that there is a directory for arm64. PXE booting ARM devices requires an entirely separate configuration, and as such it is outside the score of this document. However, the option is available to do so. Furthermore, you may choose to add an option for Ubuntu Server, Kubuntu, Xubuntu, etc. in the Ubuntu directory.
+Notice that there is a directory for arm64. PXE booting ARM devices requires an entirely separate configuration, and as such it is outside the scope of this document. However, the option is available to do so. Furthermore, you may choose to add an option for Ubuntu Server, Kubuntu, Xubuntu, etc. in the Ubuntu directory.
 ## NFS
 The required files will be placed in `/nfs/nfsboot/`. Create the following directories:
 ```
