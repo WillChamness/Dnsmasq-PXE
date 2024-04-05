@@ -57,7 +57,7 @@ Note that there is no directory for Debian. This is intentional: Debian cannot b
 The HTTP root is located in `/var/www/html/` by default. Create the following directories:
 ```
 sudo mkdir -p /var/www/html/httpboot/{archlinux,ubuntu}
-sudo mkdir -p /var/www/html/httpboot/ubuntu/dekstop
+sudo mkdir -p /var/www/html/httpboot/ubuntu/desktop
 ```
 ![http](./.github/http-directory.png?raw=true)<br></br>
 Note that there is no directory for Debian. This is intentional: Debian cannot boot with HTTP.
@@ -79,7 +79,7 @@ sudo umount /mnt
 Copy `/mnt/.` and NOT `/mnt/*` to the destination. There are hidden files that need to be copied. 
 <br></br>
 ## Configuring NFS server
-Edit line 12 of `/etc/default/nfs-kernel-server/` so that it looks like this:
+Edit line 12 of `/etc/default/nfs-kernel-server` so that it looks like this:
 ```
 RPCMOUNTDOPTS="--port 40000"
 ```
